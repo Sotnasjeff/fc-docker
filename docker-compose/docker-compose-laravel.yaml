@@ -1,0 +1,22 @@
+version: '3'
+services:
+  laravel:
+    image: php:7.4-fpm-alpine
+    container_name: laravel
+    networks:
+      - laranet
+
+  nginx:
+    image: nginx:1.15.0-alpine
+    build:
+      context: /home/jefferson/my-projects/fc-docker/otimizando-imagens/nginx
+      dockerfile: Dockerfile.prod
+    container_name: nginx
+    networks:
+      - laranet
+    ports:
+      - "8080:80"
+
+networks:
+  laranet:
+    driver: bridge
